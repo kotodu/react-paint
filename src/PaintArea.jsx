@@ -10,11 +10,13 @@ class PaintArea extends React.Component{
              * @property
              * @type {number}
              */
-            px:4
+            px: 4,
+            drawing:false
         }
         // Refの詳細
         // https://ja.reactjs.org/docs/refs-and-the-dom.html
         this.canvas = React.createRef();
+        this.paintArea = React.createRef();
     }
     draw(px) {
         // https://developer.mozilla.org/ja/docs/Web/API/CanvasRenderingContext2D
@@ -38,10 +40,13 @@ class PaintArea extends React.Component{
         ctx.stroke();
     }
     componentDidMount() {
+        this.ctx = this.paintArea.current.getContext("2d");
+        this.ctx.lineWidth = this.state.px;
         this.draw(this.state.px);
     }
     componentDidUpdate() {
         this.draw(this.state.px);
+        this.ctx.lineWidth = this.state.px;
     }
     render(){
         return (
@@ -56,7 +61,7 @@ class PaintArea extends React.Component{
                         value={this.state.px}
                         onChange={(e) => {
                             this.setState({
-                                px: e.target.value
+                                px: e.target.value,
                             });
                         }}
                     />
@@ -66,10 +71,55 @@ class PaintArea extends React.Component{
                     ref={this.canvas}
                     width="400"
                     height="400"
+                    style={{
+                        borderStyle:"solid",
+                        borderColor: "black",
+                        borderWidth: 2,
+                    }}
                 />
-                <br />
+                <canvas
+                    id="paintArea"
+                    ref={this.paintArea}
+                    width={600}
+                    height={600}
+                    style={{
+                        borderStyle:"solid",
+                        borderColor: "black",
+                        borderWidth: 2,
+                    }}
+                    onMouseDown={e => {
+                        const x = e.pageX - e.currentTarget.offsetLeft;
+                        const y = e.pageY - e.currentTarget.offsetTop;
+                        this.setState({
+                            drawing:true
+                        })
+                        const ctx = this.ctx;
+                        ctx.beginPath();
+                        ctx.moveTo(x,y);
+                        ctx.stroke();
+                    }}
+                    onMouseMove={e => {
+                        const y = e.pageY - e.currentTarget.offsetTop;
+                        const x = e.pageX - e.currentTarget.offsetLeft;
+                        if (this.state.drawing) {
+                            const ctx = this.ctx;
+                            ctx.lineTo(x,y);
+                            ctx.stroke();
+                        }
+                    }}
+                    onMouseUp={e => {
+                        const y = e.pageY - e.currentTarget.offsetTop;
+                        const x = e.pageX - e.currentTarget.offsetLeft;
+                        this.setState({
+                            drawing:false
+                        })
+                        const ctx = this.ctx;   
+                        ctx.lineTo(x,y);
+                        ctx.stroke();
+                    }}
+                />
             </div>
-        );        
+        );
     
     }
 }
