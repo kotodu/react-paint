@@ -2,7 +2,7 @@ import React from "react";
 // 参考
 // https://qiita.com/kotodu/items/b563dfe8b08bb3338eb5
 
-class PaintArea extends React.Component{
+class PaintArea extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -11,7 +11,7 @@ class PaintArea extends React.Component{
              * @type {number}
              */
             px: 4,
-            drawing:false
+            drawing: false
         }
         // Refの詳細
         // https://ja.reactjs.org/docs/refs-and-the-dom.html
@@ -48,7 +48,7 @@ class PaintArea extends React.Component{
         this.draw(this.state.px);
         this.ctx.lineWidth = this.state.px;
     }
-    render(){
+    render() {
         return (
             <div
                 id="a01"
@@ -72,7 +72,7 @@ class PaintArea extends React.Component{
                     width="400"
                     height="400"
                     style={{
-                        borderStyle:"solid",
+                        borderStyle: "solid",
                         borderColor: "black",
                         borderWidth: 2,
                     }}
@@ -83,7 +83,7 @@ class PaintArea extends React.Component{
                     width={600}
                     height={600}
                     style={{
-                        borderStyle:"solid",
+                        borderStyle: "solid",
                         borderColor: "black",
                         borderWidth: 2,
                     }}
@@ -91,11 +91,11 @@ class PaintArea extends React.Component{
                         const x = e.pageX - e.currentTarget.offsetLeft;
                         const y = e.pageY - e.currentTarget.offsetTop;
                         this.setState({
-                            drawing:true
+                            drawing: true
                         })
                         const ctx = this.ctx;
                         ctx.beginPath();
-                        ctx.moveTo(x,y);
+                        ctx.moveTo(x, y);
                         ctx.stroke();
                     }}
                     onMouseMove={e => {
@@ -103,7 +103,7 @@ class PaintArea extends React.Component{
                         const x = e.pageX - e.currentTarget.offsetLeft;
                         if (this.state.drawing) {
                             const ctx = this.ctx;
-                            ctx.lineTo(x,y);
+                            ctx.lineTo(x, y);
                             ctx.stroke();
                         }
                     }}
@@ -111,16 +111,16 @@ class PaintArea extends React.Component{
                         const y = e.pageY - e.currentTarget.offsetTop;
                         const x = e.pageX - e.currentTarget.offsetLeft;
                         this.setState({
-                            drawing:false
+                            drawing: false
                         })
-                        const ctx = this.ctx;   
-                        ctx.lineTo(x,y);
+                        const ctx = this.ctx;
+                        ctx.lineTo(x, y);
                         ctx.stroke();
                     }}
                 />
             </div>
         );
-    
+
     }
 }
 export default PaintArea;
