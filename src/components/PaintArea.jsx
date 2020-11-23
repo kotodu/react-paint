@@ -6,13 +6,14 @@ class PaintArea extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            /**
-             * @property
-             * @type {number}
-             */
-            px: 4,
             drawing: false
         }
+        /**
+         * @property {number} px 線幅
+         * @default 4
+         * @description class記法なので毎回更新する必要あり
+         */
+        this.px = props.lineWidth;
         // Refの詳細
         // https://ja.reactjs.org/docs/refs-and-the-dom.html
         this.canvas = React.createRef();
@@ -41,31 +42,23 @@ class PaintArea extends React.Component {
     }
     componentDidMount() {
         this.ctx = this.paintArea.current.getContext("2d");
-        this.ctx.lineWidth = this.state.px;
-        this.draw(this.state.px);
+        this.ctx.lineWidth = this.px;
+        this.draw(this.px);
     }
     componentDidUpdate() {
-        this.draw(this.state.px);
-        this.ctx.lineWidth = this.state.px;
+        // thispxを更新
+        this.px = this.props.lineWidth;
+
+        // 家を描画
+        this.draw(this.px);
+
+        // canvasの線幅を更新
+        this.ctx.lineWidth = this.px;
     }
     render() {
         return (
             <div
-                id="a01"
             >
-                <h2>
-                    {this.state.px}px
-                </h2>
-                <p>
-                    <input
-                        value={this.state.px}
-                        onChange={(e) => {
-                            this.setState({
-                                px: e.target.value,
-                            });
-                        }}
-                    />
-                </p>
                 <canvas
                     id="canvas"
                     ref={this.canvas}
