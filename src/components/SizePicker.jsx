@@ -17,7 +17,7 @@ const SizePicker = (props) => {
             min={1}
             max={40}
             step={0.5}
-            className="form-lange col-auto"
+            className="form-lange col-6"
             onChange={(e) => {
                 // 新たな線幅を上位コンポーネントへ
                 const newWidth = Number(e.target.value);
@@ -31,16 +31,16 @@ const SizePicker = (props) => {
             className="container row"
         >
             <h3
-                className="col-auto"
+                className="col-3"
             >
                 線幅
             </h3>
             {widthInput}
-            <p
-                className="col-auto"
+            <div
+                className="col-3"
             >
                 {lineWidth}px
-            </p>
+            </div>
         </div>
     );
 }
