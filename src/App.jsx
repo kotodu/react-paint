@@ -1,7 +1,9 @@
 import React from "react";
 import ColorPicker from "./components/ColorPicker";
 import PaintArea from "./components/PaintArea";
+import PreviewHome from "./components/Preview";
 import SizePicker from "./components/SizePicker";
+import TopBar from "./components/TopBar";
 import { APP } from "./const";
 
 /**
@@ -32,6 +34,12 @@ class App extends React.Component {
     render() {
         const lineWidth = this.state.lineWidth;
         const lineColor = this.state.lineColor;
+
+        // 上部バー
+        const topbar = (
+            <TopBar
+            />
+        );
 
         // ヘッダー部
         const title = (
@@ -70,12 +78,22 @@ class App extends React.Component {
             />
         );
 
+        // サンプルのプレビュー
+        const preview = (
+            <PreviewHome
+                lineColor={lineColor}
+                lineWidth={lineWidth}
+            />
+        );
+
         // 描画内容
         return (
             <div>
+                {topbar}
                 {title}
                 {sizePicker}
                 {colorPicker}
+                {preview}
                 {paintArea}
             </div>
         );
