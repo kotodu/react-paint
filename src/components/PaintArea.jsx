@@ -31,8 +31,14 @@ class PaintArea extends React.Component {
         /**
          * @property {string} lineColor 線色
          * @description class記法なので毎回更新する必要あり
+         * また、有効化かどうかで実際に描画されるか異なる
          */
-        this.color = props.lineColor;
+        this.lineColor = props.lineColor;
+
+        /**
+         * @property {string} fillColor 塗り色
+         */
+        this.fillColor = props.fillColor;
 
         // Refの詳細
         // https://ja.reactjs.org/docs/refs-and-the-dom.html
@@ -46,7 +52,8 @@ class PaintArea extends React.Component {
         // 現在のcontextを取得する
         this.ctx = this.paintArea.current.getContext("2d");
         this.ctx.lineWidth = this.px;
-        this.ctx.strokeStyle = this.color;
+        this.ctx.strokeStyle = this.lineColor;
+        this.ctx.fillStyle = this.fillColor;
     }
 
     /**
@@ -55,11 +62,13 @@ class PaintArea extends React.Component {
     componentDidUpdate() {
         // thispxを更新
         this.px = this.props.lineWidth;
-        this.color = this.props.lineColor;
+        this.lineColor = this.props.lineColor;
+        this.fillColor = this.props.fillColor;
 
         // canvasの線幅を更新
         this.ctx.lineWidth = this.px;
-        this.ctx.strokeStyle = this.color;
+        this.ctx.strokeStyle = this.lineColor;
+        this.ctx.fillStyle = this.fillColor;
     }
 
     /**

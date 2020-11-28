@@ -58,6 +58,7 @@ class App extends React.Component {
         const paintArea = (
             <PaintArea
                 lineColor={lineColor}
+                fillColor={fillColor}
                 lineWidth={lineWidth}
             />
         );
@@ -92,7 +93,7 @@ class App extends React.Component {
                 }}
                 changeCheckStrokeRect={() => {
                     this.setState({
-                        strokeRect:!this.state.strokeRect
+                        strokeRect: !this.state.strokeRect
                     })
                 }}
             />
