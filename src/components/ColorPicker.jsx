@@ -19,19 +19,22 @@ const ColorPicker = (props) => {
 
     // label
     const pickerLabel = (
-        <label
-            htmlFor="color-picker"
-            className="form-label"
+        <h3
+            className="form-label col"
         >
-            Color Picker
-        </label>
+            <label
+                htmlFor="color-picker"
+            >
+                枠線色
+            </label>
+        </h3>
     );
 
     // picker本体
     const pickerInput = (
         <input
             type="color"
-            className="form-control form-control-color"
+            className="form-control form-control-color col"
             id="color-picker"
             value={color}
             title="Choose your color"
@@ -46,7 +49,9 @@ const ColorPicker = (props) => {
 
     // 描画内容
     return (
-        <div>
+        <div
+            className="container row"
+        >
             {pickerLabel}
             {pickerInput}
         </div>

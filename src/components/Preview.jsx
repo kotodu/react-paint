@@ -60,7 +60,7 @@ class PreviewHome extends React.Component {
         ctx.clearRect(0, 0, CANVAS.WIDTH, CANVAS.HEIGHT)
 
         // 以下で壁を作成
-        ctx.strokeRect(30, 50, 40,30);
+        ctx.strokeRect(30, 50, 40, 30);
 
         // 以下でドアを作成
         ctx.fillRect(45, 60, 10, 20);
@@ -78,17 +78,28 @@ class PreviewHome extends React.Component {
 
         // 描画内容
         return (
-            <canvas
-                id="previewCanvas"
-                ref={this.canvas}
-                width={CANVAS.WIDTH}
-                height={CANVAS.HEIGHT}
-                style={{
-                    borderStyle: "solid",
-                    borderColor: "black",
-                    borderWidth: 1,
-                }}
-            />
+            <div
+                className="container row"
+            >
+                <h3
+                    className="col align-self-center"
+                >
+                    プレビュー
+                </h3>
+                <canvas
+                    id="previewCanvas"
+                    ref={this.canvas}
+                    width={CANVAS.WIDTH}
+                    height={CANVAS.HEIGHT}
+                    style={{
+                        borderStyle: "solid",
+                        borderColor: "black",
+                        borderWidth: 1,
+                    }}
+                    className="col"
+                />
+
+            </div>
         );
     }
 }

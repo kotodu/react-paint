@@ -1,8 +1,8 @@
 import React from "react";
-import ColorPicker from "./components/ColorPicker";
+
+import RightBar from "./components/RightBar";
 import PaintArea from "./components/PaintArea";
-import PreviewHome from "./components/Preview";
-import SizePicker from "./components/SizePicker";
+
 import TopBar from "./components/TopBar";
 import { APP } from "./const";
 
@@ -41,35 +41,6 @@ class App extends React.Component {
             />
         );
 
-        // ヘッダー部
-        const title = (
-            <h1>タイトル</h1>
-        );
-
-        // サイズピッカー
-        const sizePicker = (
-            <SizePicker
-                lineWidth={lineWidth}
-                setWidth={(newWidth) => {
-                    this.setState({
-                        lineWidth:newWidth
-                    });
-                }}
-            />
-        );
-
-        // カラーピッカー
-        const colorPicker = (
-            <ColorPicker
-                color={lineColor}
-                setColor={(newColor) => {
-                    this.setState({
-                        lineColor:newColor
-                    });
-                }}
-            />
-        );
-
         // 描画エリア
         const paintArea = (
             <PaintArea
@@ -78,11 +49,21 @@ class App extends React.Component {
             />
         );
 
-        // サンプルのプレビュー
-        const preview = (
-            <PreviewHome
+        // 右バー
+        const rightBar = (
+            <RightBar
                 lineColor={lineColor}
                 lineWidth={lineWidth}
+                setLineWidth={(newWidth) => {
+                    this.setState({
+                        lineWidth: newWidth
+                    });
+                }}
+                setLineColor={(newColor) => {
+                    this.setState({
+                        lineColor: newColor
+                    });
+                }}
             />
         );
 
@@ -90,11 +71,12 @@ class App extends React.Component {
         return (
             <div>
                 {topbar}
-                {title}
-                {sizePicker}
-                {colorPicker}
-                {preview}
-                {paintArea}
+                <div
+                    className="container row p-0 m-0"
+                >
+                    {paintArea}
+                    {rightBar}
+                </div>
             </div>
         );
     }

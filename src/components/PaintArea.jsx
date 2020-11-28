@@ -111,9 +111,8 @@ class PaintArea extends React.Component {
     }
 
     render() {
-
-        // 描画内容
-        return (
+        // canvas
+        const canvas = (
             <canvas
                 id="paintArea"
                 ref={this.paintArea}
@@ -146,6 +145,15 @@ class PaintArea extends React.Component {
                     this.drawLineEnd(x, y);
                 }}
             />
+        );
+
+        // 描画内容
+        return (
+            <main
+                className="col-8 text-center"
+            >
+                {canvas}
+            </main>
         );
 
     }
