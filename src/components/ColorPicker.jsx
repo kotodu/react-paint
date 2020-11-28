@@ -13,9 +13,14 @@ import React from "react";
  * @param {any} props 
  * @returns {JSX.Element}
  */
-const ColorPicker = (props) => {
-    // 引数からの受け取り
-    const color = props.color;
+const ColorPicker = ({
+    color,
+    setColor,
+    id,
+    label,
+    isStroke,
+    changeCheckStroke
+}) => {
 
     // label
     const pickerLabel = (
@@ -23,25 +28,48 @@ const ColorPicker = (props) => {
             className="form-label col"
         >
             <label
-                htmlFor="color-picker"
+                htmlFor={id}
             >
-                枠線色
+                {label}
             </label>
         </h3>
     );
+
+    // 有効化チェックボックス
+    const strokeCheck = (
+        <div
+            className="form-check col align-self-center"
+        >
+            <input
+                className="form-check-input"
+                type="checkbox"
+                checked={isStroke}
+                id={"check-" + id}
+                onChange={() => {
+                    changeCheckStroke();
+                }}
+            />
+            <label
+                className="form-check-label"
+                htmlFor={"check-"+id}
+            >
+                有効化
+            </label>
+        </div>
+    )
 
     // picker本体
     const pickerInput = (
         <input
             type="color"
             className="form-control form-control-color col"
-            id="color-picker"
+            id={id}
             value={color}
             title="Choose your color"
             onChange={(e) => {
                 // 新たな色を上位コンポーネントへ渡す
                 const newColor = e.target.value;
-                props.setColor(newColor);
+                setColor(newColor);
             }}
         />
     );
@@ -53,6 +81,7 @@ const ColorPicker = (props) => {
             className="container row"
         >
             {pickerLabel}
+            {strokeCheck}
             {pickerInput}
         </div>
     );

@@ -31,13 +31,13 @@ const SizePicker = (props) => {
             className="container row"
         >
             <h3
-                className="col-3"
+                className="col-4"
             >
                 線幅
             </h3>
             {widthInput}
             <div
-                className="col-3"
+                className="col-2 align-self-center"
             >
                 {lineWidth}px
             </div>

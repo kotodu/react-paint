@@ -10,8 +10,14 @@ import ColorPicker from "./ColorPicker";
 const RightBar = ({
     lineColor,
     lineWidth,
+    fillColor,
+    isStrokeLine,
+    isStrokeRect,
     setLineWidth,
-    setLineColor
+    setLineColor,
+    setFillColor,
+    changeCheckStrokeLine,
+    changeCheckStrokeRect
 }) => {
 
     // ヘッダー部
@@ -29,20 +35,40 @@ const RightBar = ({
         />
     );
 
-    // カラーピッカー
-    const colorPicker = (
+    // 枠線カラーピッカー
+    const lineColorPicker = (
         <ColorPicker
+            id="color-picker-lineColor"
             color={lineColor}
             setColor={(newColor) => {
                 setLineColor(newColor);
             }}
+            label="枠線色"
+            isStroke={isStrokeLine}
+            changeCheckStroke={changeCheckStrokeLine}
         />
     );
+
+    // 塗り色カラーピッカー
+    const fillColorPicker = (
+        <ColorPicker
+            id="color-picker-fillColor"
+            color={fillColor}
+            setColor={(newColor) => {
+                setFillColor(newColor)
+            }}
+            label="塗り色"
+            isStroke={isStrokeRect}
+            changeCheckStroke={changeCheckStrokeRect}
+        />
+    );
+
     // サンプルのプレビュー
     const preview = (
         <PreviewHome
             lineColor={lineColor}
             lineWidth={lineWidth}
+            fillColor={fillColor}
         />
     );
 
@@ -55,7 +81,9 @@ const RightBar = ({
             <hr></hr>
             {sizePicker}
             <hr></hr>
-            {colorPicker}
+            {lineColorPicker}
+            <hr></hr>
+            {fillColorPicker}
             <hr></hr>
             {preview}
         </aside>

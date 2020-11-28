@@ -27,13 +27,26 @@ class App extends React.Component {
              * @default "#0040FF"
              * @description 既定値を参照する
              */
-            lineColor: APP.LINE_COLOR
+            lineColor: APP.LINE_COLOR,
+
+            /**
+             * @property {string} 塗り色
+             * @default "#FF0000"
+             * @description 既定値を参照する
+             */
+            fillColor: APP.FILL_COLOR,
+
+            strokeLine: true,
+            strokeRect: false
         }
     }
 
     render() {
         const lineWidth = this.state.lineWidth;
         const lineColor = this.state.lineColor;
+        const fillColor = this.state.fillColor;
+        const strokeLine = this.state.strokeLine;
+        const strokeRect = this.state.strokeRect;
 
         // 上部バー
         const topbar = (
@@ -54,6 +67,9 @@ class App extends React.Component {
             <RightBar
                 lineColor={lineColor}
                 lineWidth={lineWidth}
+                fillColor={fillColor}
+                isStrokeLine={strokeLine}
+                isStrokeRect={strokeRect}
                 setLineWidth={(newWidth) => {
                     this.setState({
                         lineWidth: newWidth
@@ -63,6 +79,21 @@ class App extends React.Component {
                     this.setState({
                         lineColor: newColor
                     });
+                }}
+                setFillColor={(newColor) => {
+                    this.setState({
+                        fillColor: newColor
+                    });
+                }}
+                changeCheckStrokeLine={() => {
+                    this.setState({
+                        strokeLine: !this.state.strokeLine
+                    });
+                }}
+                changeCheckStrokeRect={() => {
+                    this.setState({
+                        strokeRect:!this.state.strokeRect
+                    })
                 }}
             />
         );

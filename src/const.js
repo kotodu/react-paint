@@ -11,7 +11,13 @@ const defaultValues = {
      * @property {string} LINE_COLOR 枠色
      * @default "#0040FF"
      */
-    LINE_COLOR: "#0040FF"
+    LINE_COLOR: "#0040FF",
+
+    /**
+     * @property {string} FILL_COLOR 塗り色
+     * @default "#FF0000"
+     */
+    FILL_COLOR: "#FF0000"
 }
 
 // 念の為、値が変更されないようにする
